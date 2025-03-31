@@ -1,18 +1,12 @@
 <template>
   
-  <div class="black-bg" v-if="modal_status==true">
-    <div class="white-bg">
-      <img :src="onerooms[select].image" style="width: 100%;">
-      <h4>{{onerooms[select].title}}</h4>
-      <p>{{ onerooms[select].content }}</p>
-      <p>{{ onerooms[select].price }}원</p>
-      <button @click="modal_status=false">Close</button>
-    </div>
-  </div>
+  <Modal :onerooms="onerooms" :select="select" :modal_status="modal_status"/>
 
   <div class="menu">
     <a v-for="jak in menus" :key="jak">{{ jak }}</a>
   </div>
+
+  
   
   <div v-for="(oneroom,i) in onerooms" :key="i">
     <img :src="onerooms[i].image" class="room-img">
@@ -25,7 +19,10 @@
 </template>
 
 <script>
+
 import data from './assets/oneroom.js'
+import Discount from './Discount.vue'
+import Modal from './Modal.vue'
 
 var arr = []
 export default {
@@ -46,6 +43,9 @@ export default {
     }
   },
   components : {
+    Discount : Discount,
+    Modal : Modal,
+    
   }
 }
 </script>
@@ -56,6 +56,12 @@ body {
 }
 div {
   box-sizing: border-box;
+}
+.discount {
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
 }
 .black-bg {
   width: 80%; height: 80%;
