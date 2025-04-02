@@ -7,14 +7,18 @@
   </div>
 
   
-  
-  <div v-for="(oneroom,i) in onerooms" :key="i">
+  <Card :oneroom="onerooms[i]" v-for="(prod,i) in onerooms" :key="prod"/>
+  <Card/>
+  <Card/>
+  <Card/>
+  <Card/>
+  <Card/>
+
+  <!-- <div v-for="(oneroom,i) in onerooms" :key="i">
     <img :src="onerooms[i].image" class="room-img">
     <H4 @click="modal_status=true; select=i">{{ onerooms[i].title }}</H4>
     <p >${{ onerooms[i].price }}</p>
-    
-    
-  </div>
+  </div> -->
   
 </template>
 
@@ -23,12 +27,14 @@
 import data from './assets/oneroom.js'
 import Discount from './Discount.vue'
 import Modal from './Modal.vue'
+import Card from './Card.vue'
 
 var arr = []
 export default {
   name : 'App',
   data(){
     return {
+      obj : {name:'kim',age:20},
       select : 0,
       onerooms : data,
       modal_status : false,
@@ -45,6 +51,7 @@ export default {
   components : {
     Discount : Discount,
     Modal : Modal,
+    Card:Card,
     
   }
 }
