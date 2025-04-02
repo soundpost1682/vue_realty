@@ -1,7 +1,7 @@
 <template>
 <div>
     <img :src="oneroom.image" class="room-img">
-    <H4>{{ oneroom.title }}</H4>
+    <H4 @click="send">{{ oneroom.title }}</H4>
     <p >${{ oneroom.price }}</p>
   </div>
 </template>
@@ -10,7 +10,13 @@
 import oneroom from './assets/oneroom';
 
 export default {
-  props : {oneroom:Object}
+  props : {oneroom:Object,}
+,
+  methods:{
+    send(){
+      this.$emit('oepnModal', this.oneroom.id)
+    }
+  }
 }
 </script>
 

@@ -1,18 +1,14 @@
 <template>
   
-  <Modal :onerooms="onerooms" :select="select" :modal_status="modal_status"/>
+  <Modal @closeModal="modal_status=false" :onerooms="onerooms" :select="select" :modal_status="modal_status"/>
 
   <div class="menu">
     <a v-for="jak in menus" :key="jak">{{ jak }}</a>
   </div>
 
   
-  <Card :oneroom="onerooms[i]" v-for="(prod,i) in onerooms" :key="prod"/>
-  <Card/>
-  <Card/>
-  <Card/>
-  <Card/>
-  <Card/>
+  <Card @openModal="modal_status=true; select=$event" :oneroom="onerooms[i]" v-for="(prod,i) in onerooms" :key="prod"/>
+  
 
   <!-- <div v-for="(oneroom,i) in onerooms" :key="i">
     <img :src="onerooms[i].image" class="room-img">

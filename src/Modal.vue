@@ -6,7 +6,7 @@
       <p>{{ onerooms[select].content }}</p>
       <p>{{ onerooms[select].price }}원</p>
       <Discount/>
-      <!-- <button @click="modal_status=false">Close</button> -->
+      <button @click="$emit('closeModal')">Close</button>
     </div>
   </div>
 </template>
