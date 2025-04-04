@@ -1,11 +1,16 @@
 <template>
   
+  <transition name="fade">
   <Modal @closeModal="modal_status=false" :onerooms="onerooms" :select="select" :modal_status="modal_status"/>
+  </transition>
 
   <div class="menu">
     <a v-for="jak in menus" :key="jak">{{ jak }}</a>
   </div>
+  <Discount/>
 
+  <button @click="priceSort">Sort by price</button>
+  <button @click="sortBack">Reset the sort</button>
   
   <Card @openModal="modal_status=true; select=$event" :oneroom="onerooms[i]" v-for="(prod,i) in onerooms" :key="prod"/>
   
@@ -25,11 +30,11 @@ import Discount from './Discount.vue'
 import Modal from './Modal.vue'
 import Card from './Card.vue'
 
-var arr = []
 export default {
   name : 'App',
   data(){
     return {
+      oneroomsOriginal :[...data],
       obj : {name:'kim',age:20},
       select : 0,
       onerooms : data,
@@ -42,6 +47,14 @@ export default {
   methods:{
     increase(){
       this.cnt+=1
+    },
+    sortBack(){
+      this.onerooms = [...this.oneroomsOriginal];
+    },
+    priceSort(){
+      this.onerooms.sort(function(a,b){
+        return a.price - b.price
+      })
     }
   },
   components : {
@@ -54,6 +67,28 @@ export default {
 </script>
 
 <style>
+.fade-leave-from {
+  opacity: 1;
+}
+.fade-leave-active {
+  transition: all 1s;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+
+
+.fade-enter-from {
+  transform: translateY(-1000);
+}
+.fade-enter-active {
+  transition: all 1s;
+}
+.fade-enter-to {
+  transform: translateY(0);
+}
+
+
 body {
   margin: 0;
 }
